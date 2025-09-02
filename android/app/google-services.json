@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "705320477245",
+    "project_id": "loom-71386",
+    "storage_bucket": "loom-71386.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705320477245:android:09cba1b8d717f74acf8054",
+        "android_client_info": {
+          "package_name": "com.example.social_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEuTtaQ6xZ9r1Hgkar9mjQQYcMtIKrqSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
