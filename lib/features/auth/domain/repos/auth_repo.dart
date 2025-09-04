@@ -1,13 +1,19 @@
-abstract class AuthRepo {
-  Future<AuthRepo?> loginwithemailpassword(String email, String password);
+import 'package:social_app/features/auth/domain/entities/app_user.dart';
 
-  Future<AuthRepo?> registerwithemailpassword(
+abstract class AuthRepo {
+  // logion
+  Future<AppUser?> loginwithemailpassword(String email, String password);
+
+  // signin
+  Future<AppUser?> registerwithemailpassword(
+    String name,
     String email,
     String password,
-    String name,
   );
 
-  Future<AuthRepo> logout();
+  //signout
+  Future<void> logout();
 
-  Future<AuthRepo> getCurrentuser();
+  // user info
+  Future<AppUser?> getCurrentuser();
 }
