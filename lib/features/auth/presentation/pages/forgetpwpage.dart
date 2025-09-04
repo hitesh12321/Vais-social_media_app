@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison, dead_code, use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:social_app/features/auth/presentation/pages/Authpage.dart';
@@ -40,6 +42,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     }
   }
 
+  @override
   void dispose() {
     emailController.dispose();
     super.dispose();
