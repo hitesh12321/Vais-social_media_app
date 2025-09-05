@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:social_app/features/auth/domain/entities/app_user.dart';
 import 'package:social_app/features/auth/domain/repos/auth_repo.dart';
@@ -32,12 +33,18 @@ class FirebaseAuthRepo implements AuthRepo {
     try {
       UserCredential userCredencial = await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
+      final FirebaseFirestore __firestore = FirebaseFirestore.instance;
 
       AppUser user = AppUser(
         uid: userCredencial.user!.uid,
         email: email,
         name: "",
       );
+      await __firestore.collection("users").doc(user.uid).set({
+        "name": name,
+        "email": email,
+        "uid": user.uid,
+      });
 
       return user;
     } on FirebaseAuthException catch (ex) {

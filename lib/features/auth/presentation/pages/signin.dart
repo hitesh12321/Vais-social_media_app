@@ -5,7 +5,7 @@ import 'package:social_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:social_app/features/auth/presentation/pages/forgetpwpage.dart';
 import 'package:social_app/features/auth/presentation/pages/homepage.dart';
 import 'package:social_app/features/auth/presentation/pages/register.dart';
-import 'package:social_app/ui_helper/uihelper.dart';
+import 'package:social_app/features/auth/presentation/UIiConponents/ui_helper/uihelper.dart';
 
 class Signin extends StatefulWidget {
   const Signin({super.key});

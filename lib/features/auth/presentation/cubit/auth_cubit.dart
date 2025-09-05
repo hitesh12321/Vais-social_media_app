@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/features/auth/domain/entities/app_user.dart';
 import 'package:social_app/features/auth/domain/repos/auth_repo.dart';
@@ -6,6 +7,8 @@ import 'package:social_app/features/auth/presentation/cubit/auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepo authRepo; // Remove nullable if it's always provided
   AppUser? _currentUser; // Remove final and make nullable
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 
   AuthCubit({required this.authRepo}) : super(AuthInitial());
 
@@ -54,6 +57,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> register(String name, String email, String pw) async {
+    
     try {
       emit(AuthLoading());
 
@@ -61,16 +65,25 @@ class AuthCubit extends Cubit<AuthState> {
 
       if (user != null) {
         _currentUser = user;
+         await _firestore.collection("users").doc(user.uid).set({
+        'uid': user.uid,
+        'email': email,
+        'name': name,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+      
         emit(Authenticated(user: user));
       } else {
         emit(Unauthenticated());
       }
     } catch (e) {
+      print("Register Error: $e");
       emit(AuthFailed(error: e));
     }
   }
 
   Future<void> logout() async {
+    print('Logout called manually');
     try {
       await authRepo.logout();
       _currentUser = null;

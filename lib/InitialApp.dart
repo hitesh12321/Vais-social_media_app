@@ -26,35 +26,39 @@ class _InitialState extends State<Initial> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: Lightmode,
-       
-home: BlocListener<AuthCubit, AuthState>(
-  listener: (context, state) {
-    if (state is Authenticated) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const Homepage()),
-      );
-    } else if (state is AuthFailed) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(state.error.toString())),
-      );
-    }
-  },
-  child: BlocBuilder<AuthCubit, AuthState>(
-    builder: (context, state) {
-      print("State::::: $state");
-      
-      if (state is AuthLoading || state is AuthInitial) {
-        return const Scaffold(
-          body: Center(child: CircularProgressIndicator()),
-        );
-      } else if (state is Authenticated) {
-        return const Homepage();
-      } else {
-        return const AuthPage();
-      }
-    },
-  ),
-),  ),
+
+        // for  navigation
+        home: BlocListener<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is Authenticated) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const Homepage()),
+              );
+            } else if (state is AuthFailed) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.error.toString())));
+            }
+          },
+
+          // for UI according to state
+          child: BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) {
+              print("State::::: $state");
+
+              if (state is AuthLoading || state is AuthInitial) {
+                return const Scaffold(
+                  body: Center(child: CircularProgressIndicator()),
+                );
+              } else if (state is Authenticated) {
+                return const Homepage();
+              } else {
+                return const AuthPage();
+              }
+            },
+          ),
+        ),
+      ),
     );
   }
 }

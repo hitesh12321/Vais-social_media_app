@@ -4,7 +4,7 @@ import 'package:social_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:social_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:social_app/features/auth/presentation/pages/homepage.dart';
 import 'package:social_app/features/auth/presentation/pages/signin.dart';
-import 'package:social_app/ui_helper/uihelper.dart';
+import 'package:social_app/features/auth/presentation/UIiConponents/ui_helper/uihelper.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
